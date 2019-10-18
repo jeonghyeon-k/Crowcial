@@ -1,0 +1,60 @@
+﻿html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title 회원 탈퇴
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/support-log.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+       
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+            div.container
+                a.navbar-brand(href="/auth/adminlogin") 크라우드 서비스 관리
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/project/support/log") 모금 현황 조회
+                        li.nav-item
+                            a.nav-link(href="/project/user/display") 회원 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/userwithdrawl") 회원 탈퇴
+                        li.nav-item
+                            a.nav-link(href="/project/manager") 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/project/manager/CompleteList") 지급된 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/adminlogout") 로그아웃
+        div.page
+            div.form
+                p.titlelabel 탈퇴신청한 사용자
+                table.table.table-striped
+                    thead
+                       tr
+                            th
+                                | 사용자 번호
+                            th
+                                | 사용자 이름
+                            th
+                                | 사용자 아이디
+                            th
+                                | 후원한 금액
+                            th
+                                | 회원 탈퇴
+                    tbody
+                        each good1 in goods1
+                            tr
+                                td
+                                    | #{good1.USER_NUM}
+                                td
+                                    | #{good1.USER_NAME}
+                                td
+                                    | #{good1.USER_ID}
+                                td
+                                    | #{good1.USER_TOTAL}
+                                td
+                                   a.smallbtn(href='/auth/userwithdrawl/'+good1.USER_NUM+ '/userdelete') 회원탈퇴
+            br

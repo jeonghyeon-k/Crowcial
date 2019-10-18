@@ -1,0 +1,28 @@
+DOCTYPE html
+
+head
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    title(board)
+body
+    table(border="1")
+    caption 게시판
+        tbody
+            tr
+                td 작성자
+                td #{row.PROJECT_USERNUM}
+                td 카테고리
+                td #{row.PROJECT_SORT}
+                td 만기일
+                td #{row.PROJECT_DUE}
+                td
+                    button(formmethod="POST" onclick="alert('좋아요를 눌렀습니다')" value="좋아요:")
+            tr
+                td 제목
+                td #{row.PROJECT_TITLE}
+                td
+            tr
+                td 내용
+                td #{row.PROJECT_CONTENT}
+                a(href="#" onclick="history.back(-1)") 돌아가기
+                a(href="/project/delete?brdno=#{row.PROJECT_NO}") 삭제
+                a(href="/project/insert?brdno=#{row.PROJECT_NO}") 수정

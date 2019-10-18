@@ -1,0 +1,38 @@
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/login.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        div.login-page
+            img.logo(src="/images/logo.png")
+            div.form
+                form.login-form(name="login")
+                    p.headmessage 로그인
+                    input(name="userid", type="text", value=userid, autocomplete="off" placeholder="아이디")
+                    input(name="password", type="password", value=password, autocomplete="off" placeholder="비밀번호")
+                    button(formmethod="POST", formaction="/auth/userlogin", onclick="return loginFormCheck()").login 로그인
+                    br
+                    button(formmethod="GET", formaction="/auth/register").register 회원가입
+                    button(formmethod="GET", formaction="/auth/user/search").find 아이디/비밀번호 찾기
+        script.
+            function loginFormCheck() {
+                if (login.userid.value == "") {
+                    alert("아이디를 입력해주세요.");
+                    login.userid.focus();
+                    return false;
+                }
+                if (login.password.value == "") {
+                    alert("비밀번호를 입력해주세요.");
+                    login.password.focus();
+                    return false;
+                }
+                return true;
+            }
+
+            var errorMsg = "#{errorMsg}";
+            if (errorMsg) {
+                alert(errorMsg);
+            }

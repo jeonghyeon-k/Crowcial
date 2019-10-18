@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_givedproject"
+        android:icon="@drawable/ic_donation"
+        android:title="후원한 프로젝트" />
+
+    <item
+        android:id="@+id/item_post"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="프로젝트 등록" />
+
+    <item
+        android:id="@+id/item_user"
+        android:icon="@drawable/ic_avatar"
+        android:title="내 정보" />
+
+</menu>

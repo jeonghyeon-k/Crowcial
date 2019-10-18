@@ -1,0 +1,41 @@
+﻿doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title 사용 내역 등록
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/insert.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.border.border-secondary.static-top
+            div.container
+                a.navbar-brand(href="/auth/userlogin")
+                    img.logo(src="/images/logo.png")
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+            div.collapse.navbar-collapse#navbarResponsive
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link(href="/auth/user/supped") 내 프로젝트 관리
+                    li.nav-item
+                        a.nav-link(href="/auth/user") 내 정보 보기
+                    li.nav-item
+                        a.nav-link(href="/auth/userlogout") 로그아웃
+        div.list-page
+            div.title-form
+                p.headmessage 사용 내역 업로드
+                p(value="new_projectnum" align="right") 
+            form(name="insert" , method="POST", enctype="multipart/form-data")
+                div.form
+                    table.table.table-hover.table-condensed
+                        tbody
+                            tr
+                                td 사용내역 첨부
+                                td(colspan=5)
+                                    input(name="spendfile", type="file", accept=".txt")
+                            tr
+                                td(colspan=6)
+                                    button.submit(formaction="/auth/usercompleteproject/", onclick="파일을 저장합니다").button 저장
+                                    button.reset(formaction="/project/list" onclick="alert('프로젝트 작성이 취소되었습니다.')").button 취소

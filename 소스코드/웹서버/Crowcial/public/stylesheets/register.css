@@ -1,0 +1,219 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.register-page {
+  width: 700px;
+  padding: 8% 0 0;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 700px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form .headmessage {
+  width: 30%;
+  color: #f2f2f2;
+  font-size: 32px;
+  text-align: center;
+  background: #E12634;
+}
+.form .titlelabel {
+    width: 20%;
+    margin: 40px 0 20px;
+    font-size: 20px;
+}
+.form .label {
+    position: relative;
+    top: 20px;
+    left: -90px;
+    width: 30%;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+}
+.form .input {
+    position: relative;
+    left: -90px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 60%;
+    float: center;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form .inputmailleft {
+    position: relative;
+    left: -60px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 20%;
+    float: left;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form .mailsign {
+  position: relative;
+  width: 1%;
+  left: -45px;
+  float: left;
+  line-height: 40px;
+}
+.form .inputline {
+  height: 30px;
+}
+.form .inputmailright {
+    position: relative;
+    left: -20px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 32%;
+    float: left;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form .mailsend {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  border: 0;
+  left: 270px;
+  top: -60px;
+  color: #fff;
+  background: #E12634;
+  width: 20%;
+  height: 40px;
+  font-size:0.8em;
+  text-align:center;
+  vertical-align:middle;
+}
+.form .mailsend:hover {
+  background: #E8515C;
+}
+.form .mailcert {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  border: 0;
+  left: 270px;
+  top: -60px;
+  color: #fff;
+  background: #E12634;
+  width: 20%;
+  height: 40px;
+  font-size:0.8em;
+  text-align:center;
+  vertical-align:middle;
+}
+.form .mailcert:hover {
+  background: #E8515C;
+}
+.form .checkline {
+  height: 30px;
+}
+.form .checklabel {
+  position: relative;
+  left: 200px;
+  width: 25%;
+  font-size: 14px;
+}
+.form .checkline input[type="checkbox"] {
+  position: relative;
+  left: 80px;
+  top: -40px;
+}
+.form .margin {
+  width: 100%;
+  height: 10px;
+}
+.form .submit {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #E12634;
+  width: 60%;
+  height: 40px;
+  line-height: 13px;
+  text-align: center;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .submit:hover {
+  background: #E8515C;
+}
+
+.form .tologin {
+  position: relative;
+}
+body {
+  background-image: url("/images/background1.jpg");
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fileBox {
+    height: 65px;
+}
+.fileBox .fileName {
+    position: relative;
+    left: -90px;
+    display: inline-block;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 60%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    vertical-align:middle;
+}
+.fileBox .btn_file {
+    position: relative;
+    left: 270px;
+    top: -60px;
+    display:inline-block;
+    color: #fff;
+    background: #E12634;
+    width:20%;
+    height:40px;
+    font-size:0.8em;
+    line-height:40px;
+    text-align:center;
+    vertical-align:middle;
+}
+.fileBox .btn_file:hover {
+    background: #E8515C;
+}
+.fileBox input[type="file"] {
+    position:absolute
+    ;width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    border:0
+}
+.logo {
+    height: 50px;
+}

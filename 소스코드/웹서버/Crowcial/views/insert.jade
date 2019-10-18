@@ -1,0 +1,94 @@
+﻿doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title 프로젝트 작성
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/insert.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.border.border-secondary.static-top
+            div.container
+                a.navbar-brand(href="/auth/userlogin")
+                    img.logo(src="/images/logo.png")
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+            div.collapse.navbar-collapse#navbarResponsive
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link(href="/auth/user") 내　　　정보
+                    li.nav-item
+                        a.nav-link(href="/auth/user/supped") 프로젝트관리
+                    li.nav-item
+                        a.nav-link(href="/auth/userlogout") 로그　　　아웃
+        div.list-page
+            div.title-form
+                p.headmessage 프로젝트 작성
+            form(name="insert" , method="POST", enctype="multipart/form-data")
+                div.form
+                    table.table.table-hover.table-condensed
+                        tbody
+                            tr
+                                td 카테고리
+                                td
+                                    select(name="category")
+                                        option(value=1 selected="selected") 장애인
+                                        option(value=2) 아동
+                                        option(value=3) 청소년
+                                        option(value=4) 다문화
+                                        option(value=5) 지구촌
+                                        option(value=6) 동물
+                                        option(value=7) 기타
+                                td 목표 금액
+                                td
+                                    input(type="number" name="duemoney")
+                                td 만기일
+                                td
+                                    input(type="date" name="deadline")
+                            tr
+                                td 제목
+                                td(colspan=5)
+                                    input(type="text" name="title")
+                            tr
+                                td 내용
+                                td(colspan=5)
+                                    textarea(name="content" rows="10")
+                            tr
+                                td 이미지 첨부
+                                td(colspan=5)
+                                    input#image(name="image", type="file", accept=".jpg")
+                            tr
+                                td(colspan=6)
+                                    button.submit(formaction="/project/insert/", onclick="return check()").button 저장
+                                    button.reset(formaction="/project/list" onclick="alert('프로젝트 작성이 취소되었습니다.')").button 취소
+            script.
+                function check() {
+                    if (insert.duemoney.value.length == 0) {
+                        alert("목표액을 입력해주세요.");
+                        insert.duemoney.focus();
+                        return false;
+                    }
+                    if (insert.deadline.value.length == 0) {
+                        alert("프로젝트 기한을 입력해주세요.");
+                        insert.deadline.focus();
+                        return false;
+                    }
+                    if (insert.title.value == "") {
+                        alert("제목을 입력해주세요.");
+                        insert.title.focus();
+                        return false;
+                    }
+                    if (insert.content.value == "") {
+                        alert("내용을 입력해주세요.");
+                        insert.content.focus();
+                        return false;
+                    }
+                    if (document.getElementById('image').files.length == 0) {
+                        alert("이미지를 첨부해주세요.");
+                        insert.image.focus();
+                        return false;
+                    }
+                    return true;
+                }

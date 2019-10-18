@@ -1,0 +1,124 @@
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/usersearch.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        // 문서 태그 부분
+        div.usersearch-page
+            div.form
+                form.idsearch-form(name="idsearch", method="GET")
+                    p.headmessage 아이디/비밀번호 찾기
+                    p.titlelabel 아이디 찾기
+                    p.label 이름
+                    input.input(name="username", type="text", autocomplete="off", pattern="[A-Za-z0-9가-힣]+", maxlength="20")
+                    div.inputline
+                        p.label 이메일
+                        input.inputmailleft(name="mailleft", type="text", maxlength="64" autocomplete="off")
+                        p.mailsign @
+                        input.inputmailright(name="mailright", type="text", maxlength="255" autocomplete="off")
+                        button.submit(formaction="/auth/user/search/id", onclick="return idsearchFormCheck()") 찾기
+                form.pwsearch-form(name="pwsearch", method="GET")
+                    p.titlelabel 비밀번호 찾기
+                    p.label 이름
+                    input.input(name="username", value=username, type="text", autocomplete="off")
+                    p.label 아이디
+                    input.input(name="userid", value=userid, type="text", pattern="[a-z0-9]+", maxlength="20", autocomplete="off")
+                    div.inputline
+                        p.label 이메일
+                        input.inputmailleft(name="mailleft", value=mailleft, type="text", maxlength="64" autocomplete="off")
+                        p.mailsign @
+                        input.inputmailright(name="mailright", value=mailright, type="text", maxlength="255" autocomplete="off")
+                        div.clear
+                        button.mailsend(formaction="/auth/user/search/mailsend", onclick="return mailsendCheck()") 전송
+                    p.label 인증번호
+                    input.input(name="mailcert", value=mailcert, type="password", autocomplete="off")
+                    button.mailcert(formaction="/auth/user/search/mailcert") 인증
+                    button.pwsubmit(formaction="/auth/user/search/pw", onclick="return pwsearchFormCheck()") 찾기
+                    button.submit(formaction="/auth/userlogin") 취소
+
+        // 스크립트 부분
+        script.
+            function idsearchFormCheck() {
+                if (idsearch.username.value == "") {
+                    alert("이름을 입력해주세요.");
+                    idsearch.username.focus();
+                    return false;
+                }
+                if (idsearch.mailleft.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    idsearch.mailleft.focus();
+                    return false;
+                }
+                if (idsearch.mailright.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    idsearch.mailright.focus();
+                    return false;
+                }
+                return true;
+            }
+            function mailsendCheck() {
+                if (pwsearch.mailleft.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    pwsearch.mailleft.focus();
+                    return false;
+                }
+                if (pwsearch.mailright.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    pwsearch.mailright.focus();
+                    return false;
+                }
+                return true;
+            }
+            function pwsearchFormCheck() {
+                if (pwsearch.username.value == "") {
+                    alert("이름을 입력해주세요.");
+                    pwsearch.username.focus();
+                    return false;
+                }
+                if (pwsearch.userid.value == "") {
+                    alert("아이디를 입력해주세요.");
+                    pwsearch.userid.focus();
+                    return false;
+                }
+                if (pwsearch.mailleft.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    pwsearch.mailleft.focus();
+                    return false;
+                }
+                if (pwsearch.mailright.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    pwsearch.mailright.focus();
+                    return false;
+                }
+                return true;
+            }
+
+            var direct = "#{direct}";
+            var message = "#{message}";
+            var id = "#{id}";
+            var tonewpassword = "#{tonewpassword}";
+            if (direct == '/auth/user/search/id') {
+                if (id) {
+                    alert(message + id);
+                } else if (message) {
+                    alert(message);
+                }
+            } else if (direct == '/auth/user/search/mailsend') {
+                if (message) {
+                    alert(message);
+                }
+            } else if (direct == '/auth/user/search/mailcert') {
+                if (message) {
+                    alert(message);
+                }
+            } else if (direct == '/auth/user/search/pw') {
+                if (message) {
+                    alert(message);
+                }
+                if (tonewpassword == "on") {
+                    window.open("/auth/user/search/pw/new", "_blank", "width=800, height=500, left=500, top=300, resizable=no, status=no, titlebar=no, toolbar=no");
+                }
+            }

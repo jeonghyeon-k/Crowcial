@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_see">
+        <item>전체</item>
+        <item>장애인</item>
+        <item>아동</item>
+        <item>청소년</item>
+        <item>다문화</item>
+        <item>지구촌</item>
+        <item>동물</item>
+        <item>기타</item>
+    </string-array>
+    <string-array name="project_sort">
+        <item>최신순</item>
+        <item>인기순</item>
+    </string-array>
+    <string-array name="category">
+        <item>장애인</item>
+        <item>아동</item>
+        <item>청소년</item>
+        <item>다문화</item>
+        <item>지구촌</item>
+        <item>동물</item>
+        <item>기타</item>
+    </string-array>
+</resources>

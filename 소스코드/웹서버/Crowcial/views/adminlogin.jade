@@ -1,0 +1,37 @@
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/adminlogin.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        div.login-page
+            div.form
+                form.login-form(name="login")
+                    p.headmessage 관리자 페이지
+                    p.label 아이디
+                    input(name="userid", type="text", value=userid, autocomplete="off")
+                    p.label 비밀번호
+                    input(name="password", type="password", value=password, autocomplete="off")
+                    button(formmethod="POST", formaction="/auth/adminlogin", onclick="return loginFormCheck()") 로그인
+                   
+        script.
+            function loginFormCheck() {
+                if (login.userid.value == "") {
+                    alert("아이디를 입력해주세요.");
+                    login.userid.focus();
+                    return false;
+                }
+                if (login.password.value == "") {
+                    alert("비밀번호를 입력해주세요.");
+                    login.password.focus();
+                    return false;
+                }
+                return true;
+            }
+
+            var errorMsg = "#{errorMsg}";
+            if (errorMsg) {
+                alert(errorMsg);
+            }

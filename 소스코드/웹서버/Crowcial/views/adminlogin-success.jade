@@ -1,0 +1,46 @@
+﻿html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/adminlogin-success.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+            div.container
+                a.navbar-brand(href="/auth/adminlogin") 크라우드 서비스 관리
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/project/support/log") 모금 현황 조회
+                        li.nav-item
+                            a.nav-link(href="/project/user/display") 회원 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/userwithdrawl") 회원 탈퇴
+                        li.nav-item
+                            a.nav-link(href="/project/manager") 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/project/manager/CompleteList") 지급된 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/adminlogout") 로그아웃
+        div.page
+            div.form
+                p.label 등록된 유저 수
+                input.input(type="text", value=usernum, readonly="on")
+                p.label 총 유저 머니
+                input.input(type="text", value=usermoney, readonly="on")
+            div.form
+                p.label 등록된 프로젝트 수
+                input.input(type="text", value=projectnum, readonly="on")
+                p.label 진행중인 프로젝트 수
+                input.input(type="text", value=doingprojectnum, readonly="on")
+                p.label 완료된 프로젝트 수
+                input.input(type="text", value=endprojectnum, readonly="on")
+                   
+        script.
+            var errorMsg = "#{errorMsg}";
+            if (errorMsg) {
+                alert(errorMsg);
+            }

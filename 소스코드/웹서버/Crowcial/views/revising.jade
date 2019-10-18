@@ -1,0 +1,146 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title 프로젝트 작성
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/revising.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+            div.container
+                a.navbar-brand(href="/auth/adminlogin") 크라우드 서비스 관리
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/project/support/log") 모금 현황 조회
+                        li.nav-item
+                            a.nav-link(href="/project/user/display") 회원 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/userwithdrawl") 회원 탈퇴
+                        li.nav-item
+                            a.nav-link(href="/project/manager") 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/project/manager/CompleteList") 지급된 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/adminlogout") 로그아웃
+        div.list-page
+            div.title-form
+                p.headmessage 프로젝트 수정
+                p(value="new_projectnum" align="right")
+            form(name="insert" method="POST")
+                div.form
+                    table.table.table-hover.table-condensed
+                        tbody
+                        each data in rows
+                            tr
+                                td 카테고리
+                                td
+                                    select(name="category")
+                                        if data.PROJECT_SORT==1
+                                            option(value=1 selected="selected") 장애인
+                                            option(value=2) 아동
+                                            option(value=3) 청소년
+                                            option(value=4) 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6) 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 2
+                                            option(value=1) 장애인
+                                            option(value=2 selected="selected") 아동
+                                            option(value=3) 청소년
+                                            option(value=4) 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6) 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 3
+                                            option(value=1) 장애인
+                                            option(value=2) 아동
+                                            option(value=3 selected="selected") 청소년
+                                            option(value=4) 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6) 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 4
+                                            option(value=1) 장애인
+                                            option(value=2) 아동
+                                            option(value=3) 청소년
+                                            option(value=4 selected="selected") 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6) 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 5
+                                            option(value=1) 장애인
+                                            option(value=2) 아동
+                                            option(value=3) 청소년
+                                            option(value=4) 다문화
+                                            option(value=5 selected="selected") 지구촌
+                                            option(value=6) 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 6
+                                            option(value=1) 장애인
+                                            option(value=2) 아동
+                                            option(value=3) 청소년
+                                            option(value=4) 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6 selected="selected") 동물
+                                            option(value=7) 기타
+                                        if data.PROJECT_SORT == 7
+                                            option(value=1) 장애인
+                                            option(value=2) 아동
+                                            option(value=3) 청소년
+                                            option(value=4) 다문화
+                                            option(value=5) 지구촌
+                                            option(value=6) 동물
+                                            option(value=7 selected="selected") 기타
+                                td 목표 금액
+                                td
+                                    input(type="number" name="duemoney" value=data.PROJECT_DUEMONEY)
+                                td 만기일
+                                td
+                                    input(type="date" name="deadline" value=data.PROJECT_DUE.getFullYear()+"-"+("0"+(data.PROJECT_DUE.getMonth()+1)).slice(-2)+"-"+("0"+data.PROJECT_DUE.getDate()).slice(-2))
+                            tr
+                                td 제목
+                                td(colspan=5)
+                                    input(type="text" name="title" value=data.PROJECT_NAME)
+                            tr
+                                td 내용
+                                td(colspan=5)
+                                    textarea(name="content" rows="10") #{data.PROJECT_CONTENT}
+                            tr
+                                td(colspan=6)
+                                    button.submit(formaction="/project/revising" formmetho="POST" onclick="return check()").button 저장
+                                    button.reset(formaction="/project/manager" formmethod="GET" onclick="alert('프로젝트 수정이 취소되었습니다.')").button 취소
+            script.
+                function check() {
+                    if (insert.duemoney.value.length == 0) {
+                        alert("목표액을 입력해주세요.");
+                        insert.duemoney.focus();
+                        return false;
+                    }
+                    if (insert.deadline.value.length == 0) {
+                        alert("프로젝트 기한을 입력해주세요.");
+                        insert.deadline.focus();
+                        return false;
+                    }
+                    if (insert.title.value == "") {
+                        alert("제목을 입력해주세요.");
+                        insert.title.focus();
+                        return false;
+                    }
+                    if (insert.content.value == "") {
+                        alert("내용을 입력해주세요.");
+                        insert.content.focus();
+                        return false;
+                    }
+                   /* if (document.getElementById('image').files.length == 0) {
+                        alert("이미지를 첨부해주세요.");
+                        insert.image.focus();
+                        return false;
+                    }*/
+                    return true;
+                }

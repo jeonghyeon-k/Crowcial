@@ -1,0 +1,168 @@
+﻿html
+    head
+        link(href='/stylesheets/supped.css', rel='stylesheet')
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+        script(src="/routes/includeHTML.js")
+        script(src='./images/jquery_mini.js', type='text/javascript')
+        script(src='./images/jquery.dimensions.js', type='text/javascript')
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.border.border-secondary.static-top
+            div.container
+                a.navbar-brand(href="/auth/userlogin")
+                    img.logo(src="/images/logo.png")
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+            div.collapse.navbar-collapse#navbarResponsive
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link(href="/auth/user") 내정보
+                    li.nav-item
+                        a.nav-link(href="/auth/user/supped") 프로젝트관리
+                    li.nav-item
+                        a.nav-link(href="/auth/userlogout") 로그아웃
+
+        .register-page
+            .form
+                form.register-form
+                    h2.headmessage 내 프로젝트 관리
+                    p.titlelabel 후원한 프로젝트
+                    table.table.table-striped
+                        thead
+                            tr
+
+                                th
+                                    | 번호
+                                th
+                                    | 프로젝트명
+                                th
+                                    | 마감날짜
+                                th
+                                    | 좋아요 갯수
+                                th
+                                    | 후원한 금액
+                        tbody
+                            each good1 in goods1
+                                tr
+                                    td
+                                        | #{good1.PROJECT_NUM}
+                                    td
+                                        | #{good1.PROJECT_NAME}
+                                    td
+                                     - var formedDate = String(good1.PROJECT_DUE.getFullYear()) + '년 ' + String(good1.PROJECT_DUE.getMonth()+1) + '월 ' + String(good1.PROJECT_DUE.getDate() + '일 ');
+                                     - formedDate
+                                        | #{formedDate}
+                                    td
+                                        | #{good1.PROJECT_LIKE}
+                                    td
+                                        | #{good1.FUND_MONEY}
+                                    td
+                                        button.smallbtn(formmethod="POST", formaction="/auth/user/"+good1.PROJECT_NUM + "/del", onclick="alert('후원 취소가 되었습니다')") 후원 취소
+
+                    p.titlelabel 좋아요한 프로젝트
+                    table.table.table-striped
+                        thead
+                            tr
+                                th
+                                    | 번호
+                                th
+                                    | 프로젝트명
+                                th
+                                    | 마감 날짜
+                                th
+                                    | 좋아요 갯수
+                                th
+                                    | 후원한 금액
+                        tbody
+                            each good2 in goods2
+                                tr
+                                    - var formedDate2 = String(good2.PROJECT_DUE.getFullYear()) + '년 ' + String(good2.PROJECT_DUE.getMonth()+1) + '월 ' + String(good2.PROJECT_DUE.getDate() + '일 ');
+                                    - formedDate2
+                                    td
+                                        |#{good2.PROJECT_NUM}
+                                    td
+                                        | #{good2.PROJECT_NAME}
+                                    td
+                                        | #{formedDate2}
+                                    td
+                                        | #{good2.PROJECT_LIKE}
+                                    td
+                                        | #{good2.FUND_MONEY}
+                                    td
+                                    td
+                                        button.smallbtn(formmethod="POST", formaction="/auth/user/"+good2.PROJECT_NUM+ "/likedel") 좋아요 취소
+
+                    p.titlelabel 진행 중 프로젝트
+                    table.table.table-striped
+                        thead
+                            tr
+                                th
+                                    | 번호
+                                th
+                                    | 프로젝트명
+                                th
+                                    | 마감 날짜
+                                th
+                                    | 좋아요 갯수
+                                th
+                                    | 모금
+                                th
+                                    | 프로젝트 삭제
+                        tbody
+                            each good3 in goods3
+                                tr
+                                    - var formedDate3 = String(good3.PROJECT_DUE.getFullYear()) + '년 ' + String(good3.PROJECT_DUE.getMonth()+1) + '월 ' + String(good3.PROJECT_DUE.getDate() + '일 ');
+                                    td
+                                        |#{good3.PROJECT_NUM}
+                                    td
+                                        | #{good3.PROJECT_NAME}
+                                    td
+                                        | #{formedDate3}
+                                    td
+                                        | #{good3.PROJECT_LIKE}
+                                    td
+                                        | #{good3.PROJECT_MONEY}
+                                    td
+                                         button.smallbtn(formmethod="POST", formaction="/auth/user/"+good3.PROJECT_NUM+ "/projectdel") 삭제
+
+                    p.titlelabel 완료된 프로젝트
+                    table.table.table-striped
+                        thead
+                            tr
+                                th
+                                    | 번호
+                                th
+                                    | 프로젝트명
+                                th
+                                    | 마감 날짜
+                                th
+                                    | 좋아요 갯수
+                                th
+                                    | 모금
+                                th
+                                    | 사용 내역 등록
+                        tbody
+                            each good4 in goods4
+                                tr
+                                    - var formedDate4 = String(good4.PROJECT_DUE.getFullYear()) + '년 ' + String(good4.PROJECT_DUE.getMonth()+1) + '월 ' + String(good4.PROJECT_DUE.getDate() + '일 ');
+                                    td
+                                        |#{good4.PROJECT_NUM}
+                                    td
+                                        | #{good4.PROJECT_NAME}
+                                    td
+                                        | #{formedDate4}
+                                    td
+                                        | #{good4.PROJECT_LIKE}
+                                    td
+                                        | #{good4.FUND_MONEY}
+                                    td
+                                         a.smallbtn(href='/auth/user/'+good4.PROJECT_NUM+ '/uploadspendfile') 사용내역등록
+
+
+        script.
+            var errorMsg = "#{errorMsg}";
+            if (errorMsg) {
+                alert(errorMsg);
+            }

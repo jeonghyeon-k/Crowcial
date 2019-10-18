@@ -1,0 +1,59 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.register-page {
+    width: 1000px;
+    padding: 16% 0 0;
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 1000px;
+    margin: 0 auto 100px;
+    padding: 80px 80px 60px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form .headmessage {
+    width: 30%;
+    color: #f2f2f2;
+    font-size: 32px;
+    text-align: center;
+    background: #E12634;
+}
+
+.form .titlelabel {
+    width: 20%;
+    margin: 40px 0 20px;
+    font-size: 20px;
+}
+
+
+body {
+    background-image: url("/images/background1.jpg");
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.logo {
+    height: 50px;
+}
+.form .smallbtn {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #343A40;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}

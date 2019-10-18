@@ -1,0 +1,14 @@
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/register-complete.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        div.complete-page
+            div.form(method="GET")
+                form.complete-form
+                    p.headmessage 회원가입 완료!
+                    p.label #{userid}님 반갑습니다!
+                    button(formaction="/auth/userlogin") 확인

@@ -1,0 +1,53 @@
+﻿html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/support-log.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+            div.container
+                a.navbar-brand(href="/auth/adminlogin") 크라우드 서비스 관리
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/project/support/log") 모금 현황 조회
+                        li.nav-item
+                            a.nav-link(href="/project/user/display") 회원 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/userwithdrawl") 회원 탈퇴
+                        li.nav-item
+                            a.nav-link(href="/project/manager") 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/project/manager/CompleteList") 지급된 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/adminlogout") 로그아웃
+        div.page
+            div.form
+                table.table.table-striped
+                    thead
+                        tr
+                            th 프로젝트(번호)
+                            th 후원자(아이디)
+                            th 금액
+                            th 후원한 시간
+                    tbody
+                        each data in rows
+                            tr
+                                - var formedDate = String(data.FUND_DATE.getFullYear()) + '년 ' + String(data.FUND_DATE.getMonth()+1) + '월 ' + String(data.FUND_DATE.getDate() + '일 ');
+                                - formedDate += String(data.FUND_DATE.getHours() + '시 ') + String(data.FUND_DATE.getMinutes() + '분 ') + String(data.FUND_DATE.getSeconds() + '초 ');
+                                td #{data.PROJECT_NAME}(#{data.PROJECT_NUM})
+                                td #{data.USER_NAME}(#{data.USER_ID})
+                                td #{data.FUND_MONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                th #{formedDate}
+                        
+
+                   
+        script.
+            var errorMsg = "#{errorMsg}";
+            if (errorMsg) {
+                alert(errorMsg);
+            }

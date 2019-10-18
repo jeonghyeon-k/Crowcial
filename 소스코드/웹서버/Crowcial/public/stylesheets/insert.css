@@ -1,0 +1,147 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.list-page {
+    padding: 8% 0 0;
+    margin: auto;
+    position: relative;
+    max-width: 90%;
+    vertical-align: center;
+}
+.logo{
+    height: 50px;
+}
+.form {
+    position: relative;
+    background: #FFFFFF;
+    height: auto;
+    margin: 20px 0 20px 0;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.title-form{
+    position: relative;
+    background: #FFFFFF;
+    height: 120px;
+    margin: 0 0 0 auto;
+    padding: 15px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.order{
+    float: right;
+}
+.headmessage {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    text-shadow: 2px 2px 2px gray;
+    font-size: 32px;
+    margin: 0 auto;
+}
+.select-line {
+    width: 100%;
+}
+.username image{
+    float: left;
+    width: 10%;
+}
+.form .label {
+    position: relative;
+    left: -90px;
+    width: 30%;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+}
+.form input {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    clear: both;
+}
+.form select {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    clear: both;
+}
+.form textarea {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    clear: both;
+}
+.button {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #E12634;
+    height: 40px;
+    line-height: 13px;
+    text-align: center;
+    border: 0;
+    margin-outside: 5px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    float: right;
+}
+.form button:hover {
+    background: #E8515C;
+}
+.title{
+    text-align: center;
+    font-size: medium;
+}
+.img{
+    position: relative;
+    height: 100%;
+    width: 50%;
+    vertical-align: middle;
+}
+.img-thumbnail{
+    float: left;
+    border-radius: 50%;
+    width: 40px;
+    height: auto;
+}
+.table{
+    height: 100%;
+    align: center;
+    vertical-align: middle;
+}
+.content{
+    height: 50%;
+}
+body {
+    background-image: url("/images/background1.jpg");
+    /*background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+    background: -moz-linear-gradient(right, #76b852, #8DC26F);
+    background: -o-linear-gradient(right, #76b852, #8DC26F);
+    background: linear-gradient(to left, #76b852, #8DC26F);*/
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

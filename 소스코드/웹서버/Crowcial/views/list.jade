@@ -1,0 +1,92 @@
+doctype html
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/list.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+        script(src="/routes/includeHTML.js")
+        script(src='./images/jquery_mini.js', type='text/javascript')
+        script(src='./images/jquery.dimensions.js', type='text/javascript')
+        title #{order} 프로젝트 보기
+
+    body
+
+
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.border.border-secondary.static-top
+            div.container
+                a.navbar-brand(href="/auth/userlogin")
+                    img.logo(src="/images/logo.png")
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+            div.collapse.navbar-collapse#navbarResponsive
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link(href="/auth/user") 내정보
+                    li.nav-item
+                        a.nav-link(href="/auth/user/supped") 프로젝트관리
+                    li.nav-item
+                        a.nav-link(href="/auth/userlogout") 로그아웃
+        div.list-page
+            div.title-form
+                form.select-line(action="/project/list")
+                    p.headmessage #{order} 프로젝트 보기
+                    button(type="submit" onclick="sort()").order.button 정렬
+                    select(name="order" id="order").order.button
+                        option(value="num" selected="selected") 최신순
+                        option(value="likeit") 좋아요순
+                        option(value="category") 카테고리별
+                    button(value="insert" formmethod="GET" formaction="/project/insert").order.button 글쓰기
+            each data in rows
+                div.form
+                    img(src="/images/projects/#{data.PROJECT_IMAGE}"+".jpg").img
+                    table(align="right" width="50%").table.table-hover.table-condensed
+                        tbody
+                            colgroup
+                                col(width="15%")
+                                col(width="35%")
+                            tr
+                                td
+                                    img(src="/images/profiles/#{data.USER_IMAGE}"+".jpg").img-thumbnail
+                                td(colspan=2).username
+                                    p #{data.USER_NAME}
+                                td(id=sort).category
+                                    if data.PROJECT_SORT==1
+                                        p 장애인
+                                    else if data.PROJECT_SORT==2
+                                        p 아동
+                                    else if data.PROJECT_SORT==3
+                                        p 청소년
+                                    else if data.PROJECT_SORT==4
+                                        p 다문화
+                                    else if data.PROJECT_SORT==5
+                                        p 지구촌
+                                    else if data.PROJECT_SORT==6
+                                        p 동물
+                                    else
+                                        p 기타
+                            tr
+                                td(colspan=4).title
+                                    p #{data.PROJECT_NAME}
+                            tr
+                                td(colspan=2).date
+                                    p #{data.PROJECT_DUE.getFullYear()}-#{data.PROJECT_DUE.getMonth()+1}-#{data.PROJECT_DUE.getDate()}
+                                td.money
+                                    p #{data.PROJECT_MONEY}
+                                td
+                                    p / #{data.PROJECT_DUEMONEY} 원
+                            tr
+                                td(colspan=4).content
+                                    p #{data.PROJECT_CONTENT}
+                            tr
+                                td(colspan=3)
+                                    form(name='input', method='post', action='/project/list/'+data.PROJECT_NUM+ '/support')
+                                        input(type='number', placeholder="후원할 금액을 입력하세요",name='money', maxlength='20')
+                                        button(type='submit', value='전송').button2 후원
+                                td
+                                        a(href="/project/list/" + data.PROJECT_NUM + "/like").button2 👍 #{data.PROJECT_LIKE}
+        script.
+            function supportmoney() {
+                window.open("/project/list/support");
+            }

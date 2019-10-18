@@ -1,0 +1,179 @@
+html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/register.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        // 문서 태그 부분
+        div.register-page
+            div.form
+                form.register-form(name="register", method="POST", enctype="multipart/form-data")
+                    p.headmessage 회원 가입
+                    p.titlelabel 기본정보
+                    p.label 이름
+                    input.input(name="username", type="text", value=username, autocomplete="off", pattern="[A-Za-z0-9가-힣]+", maxlength="20")
+                    p.label 프로필 사진
+                    div.fileBox
+                        input.fileName(type="text", readonly="readonly")
+                        label.btn_file(for="uploadBtn") 찾아보기
+                        input#uploadBtn(name="profile", type="file", accept=".jpg")
+                    p.label 아이디
+                    input.input#userid(name="userid", type="text", value=userid, autocomplete="off", pattern="[a-z0-9]+", maxlength="20")
+                    p.label 비밀번호
+                    input.input(name="password", type="password", value=password, autocomplete="off", pattern="[!-~]+", maxlength="20")
+                    p.label 비밀번호 확인
+                    input.input(name="password2", type="password", value=password2, autocomplete="off", pattern="[!-~]+", maxlength="20")
+                    div.inputline
+                        p.label 이메일
+                        input.inputmailleft(name="mailleft", type="text", value=mailleft, autocomplete="off", maxlength="64")
+                        p.mailsign @
+                        input.inputmailright(name="mailright", type="text", value=mailright, autocomplete="off", maxlength="255")
+                        button.mailsend(formaction="/auth/register/mailsend", onclick="return mailFormCheck()") 전송
+                    p.label 인증번호
+                    input.input(name="mailcert", value=mailcert, type="password", autocomplete="off", maxlength="20")
+                    button.mailcert(formaction="/auth/register/mailcert") 인증
+                    p.titlelabel 계좌정보
+                    p.label 은행
+                    input.input(name="bank", type="text", value=bank, autocomplete="off", maxlength="20")
+                    p.label 계좌번호
+                    input.input(name="bankaccount", type="text", value=bankaccount, autocomplete="off", maxlength="20")
+                    div.checkline
+                        p.checklabel 서비스 약관 동의
+                        - if (checkbox1 == "on")
+                            input(name="checkbox1", type="checkbox", checked)
+                        - else
+                            input(name="checkbox1", type="checkbox")
+                    div.checkline
+                        p.checklabel 개인정보 수집 이용 동의
+                        - if (checkbox2 == "on")
+                            input(name="checkbox2", type="checkbox", checked)
+                        - else
+                            input(name="checkbox2", type="checkbox")
+                    div.margin
+                    button.submit(formaction="/auth/register/", onclick="return registerFormCheck()") 가입
+                form.tologin
+                    button.submit(formmethod="GET", formaction="/auth/userlogin") 취소
+
+        // 스크립트 부분
+        script.
+            function mailFormCheck() {
+                if (register.mailleft.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    register.mailleft.focus();
+                    return false;
+                }
+                if (register.mailright.value == "") {
+                    alert("이메일을 입력해주세요.");
+                    register.mailright.focus();
+                    return false;
+                }
+                return true;
+            }
+
+            // 버튼을 눌러서 POST 요청을 하기전에 클라이언트단에서 양식들이 알맞게 입력되었는지 체크
+            function registerFormCheck() {
+                if (register.username.value == "") {
+                    alert("이름을 입력해주세요.");
+                    register.username.focus();
+                    return false;
+                }
+                if (register.profile.value == "") {
+                    alert("프로필사진을 업로드해주세요.");
+                    register.username.focus();
+                    return false;
+                }
+                if (register.userid.value == "") {
+                    alert("아이디를 입력해주세요.");
+                    register.userid.focus();
+                    return false;
+                }
+                if (register.password.value == "") {
+                    alert("비밀번호를 입력해주세요.");
+                    register.password.focus();
+                    return false;
+                }
+                if (register.password.value != register.password2.value) {
+                    alert("비밀번호 확인을 알맞게 입력해주세요.");
+                    register.password2.focus();
+                    return false;
+                }
+                if (register.bank.value == "") {
+                    alert("은행정보를 입력해주세요.");
+                    register.bank.focus();
+                    return false;
+                }
+                if (register.bankaccount.value == "") {
+                    alert("계좌번호를 입력해주세요.");
+                    register.bankaccount.focus();
+                    return false;
+                }
+                if (!register.checkbox1.checked) {
+                    alert("서비스 약관에 동의해주세요.");
+                    return false;
+                }
+                if (!register.checkbox2.checked) {
+                    alert("개인정보 수집에 동의해주세요.");
+                    return false;
+                }
+                return true;
+            }
+
+            var direct = "#{direct}";
+            var method = "#{method}";
+            var message = "#{message}";
+            var mailleft = "#{mailleft}";
+            var mailright = "#{mailright}";
+            var certified = "#{certified}";
+            var alreadyid = "#{alreadyid}";
+            if (direct == "/auth/register/mailsend") {
+                if (message) {
+                    alert(message);
+                } else {
+                    if (method == "POST" && certified != "on" && mailleft && mailright) {
+                        alert("인증번호가 메일로 전송되었습니다.");
+                    }
+                }
+            } else if (direct == "/auth/register/mailcert") {
+                if (method == "POST") {
+                    if (certified == "on") {
+                        alert("인증되었습니다.");
+                    } else {
+                        alert("인증번호를 올바르게 입력하세요.");
+                    }
+                }
+            } else if (direct == "/auth/register") {
+                if (method == "POST") {
+                    if (certified != "on") {
+                        alert("이메일 인증이 필요합니다.");
+                    } else {
+                        if (alreadyid == "on") {
+                            alert("이미 존재하는 ID입니다.");
+                            register.userid.focus();
+                        }
+                    }
+                }
+            }
+
+            $(document).ready(() => {
+
+                // 파일이 선택되면 파일의 이름을 readonly input칸에 적어줌.
+                var uploadFile = $('.fileBox #uploadBtn');
+                uploadFile.on('change', function() {
+                    if (window.FileReader) {
+                        var filename = $(this)[0].files[0].name;
+                    } else {
+                        var filename = $(this).val().split('/').pop().split('\\').pop();
+                    }
+                    $(this).siblings('.fileName').val(filename);
+                });
+
+                // 아이디 input칸에 영문자, 숫자가 아닌 문자가 입력되면 지움.
+                $("#userid").keyup(function(event){
+                    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                        var inputVal = $(this).val();
+                        $(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));    
+                    }
+                });
+            });

@@ -1,0 +1,156 @@
+﻿html
+    head
+        link(href="/stylesheets/bootstrap.min.css", rel="stylesheet")
+        link(href="/stylesheets/adminproject.css", rel="stylesheet")
+        script(src="/javascripts/jquery-3.4.1.js")
+        script(src="/javascripts/bootstrap.js")
+        script(src="/javascripts/bootstrap.min.js")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+            div.container
+                a.navbar-brand(href="/auth/adminlogin") 크라우드 서비스 관리
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler.icon
+                div.collapse.navbar-collapse#navbarResponsive
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/project/support/log") 모금 현황 조회
+                        li.nav-item
+                            a.nav-link(href="/project/user/display") 회원 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/userwithdrawl") 회원 탈퇴
+                        li.nav-item
+                            a.nav-link(href="/project/manager") 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/project/manager/CompleteList") 지급된 프로젝트 관리
+                        li.nav-item
+                            a.nav-link(href="/auth/adminlogout") 로그아웃
+        div.page
+            form.form(method="GET")
+                input.projectnum(name="projectnum", type="hidden")
+                table.table.table-striped
+                    p.titlelabel 진행 중 프로젝트
+                    thead
+                        tr
+                            th #
+                            th 프로젝트 이름
+                            th 진행률
+                            th 목표 날짜
+                            th 후원 한 금액
+                            th 목표 금액
+                            th
+                            th
+                    tbody
+                        each data in rows1
+                            tr
+                                - var formedDate = String(data.PROJECT_DUE.getFullYear()) + '년 ' + String(data.PROJECT_DUE.getMonth()+1) + '월 ' + String(data.PROJECT_DUE.getDate() + '일')
+                                    th #{data.PROJECT_NUM}
+                                    th #{data.PROJECT_NAME}
+                                    th #{(data.PROJECT_MONEY / data.PROJECT_DUEMONEY * 100).toFixed(2) + "%"}
+                                    th #{formedDate}
+                                    th #{data.PROJECT_MONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th #{data.PROJECT_DUEMONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th
+                                        button.smallbtn(formmethod="GET", formaction="/project/revising", onclick='return checkModificationTable(#{data.PROJECT_NUM})') 수정
+                                    th
+                                        button.smallbtn(formmethod="POST", formaction="/project/manager/removal", onclick='return checkProjectDelete(#{data.PROJECT_NUM})') 삭제
+            form.form(name="payment", method="GET")
+                input.projectnum(name="projectnum", type="hidden")
+                input#progress(name="progress", type="hidden")
+                table.table.table-striped
+                    p.titlelabel 완료 된 프로젝트
+                    thead
+                        tr
+                            th #
+                            th 프로젝트 이름
+                            th 진행률
+                            th 목표 날짜
+                            th 후원 한 금액
+                            th 목표 금액
+                            th
+                            th
+                            th
+                    tbody
+                        each data in rows2
+                            tr
+                                - var formedDate = String(data.PROJECT_DUE.getFullYear()) + '년 ' + String(data.PROJECT_DUE.getMonth()+1) + '월 ' + String(data.PROJECT_DUE.getDate() + '일')
+                                - var prog = (data.PROJECT_MONEY / data.PROJECT_DUEMONEY * 100).toFixed(2);
+                                    th #{data.PROJECT_NUM}
+                                    th #{data.PROJECT_NAME}
+                                    th #{prog + "%"}
+                                    th #{formedDate}
+                                    th #{data.PROJECT_MONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th #{data.PROJECT_DUEMONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th
+                                        button.smallbtn(formmethod="POST", formaction="/project/manager/payment", onclick='return checkPaymentTable(#{data.PROJECT_NUM}, #{prog})') 모금 지급
+                                    th
+                                        button.smallbtn(formmethod="GET", formaction="/project/revising", onclick='return checkModificationTable(#{data.PROJECT_NUM})') 수정
+                                    th
+                                        button.smallbtn(formmethod="POST", formaction="/project/manager/removal", onclick='return checkProjectDelete(#{data.PROJECT_NUM})') 삭제
+
+
+            form.form(method="GET")
+                input.projectnum(name="projectnum", type="hidden")
+                table.table.table-striped
+                    p.titlelabel 모금 지급 된 프로젝트
+                    thead
+                        tr
+                            th #
+                            th 프로젝트 이름
+                            th 진행률
+                            th 목표 날짜
+                            th 후원 한 금액
+                            th 목표 금액
+                            th
+                            th
+                    tbody
+                        each data in rows3
+                            tr
+                                - var formedDate = String(data.PROJECT_DUE.getFullYear()) + '년 ' + String(data.PROJECT_DUE.getMonth()+1) + '월 ' + String(data.PROJECT_DUE.getDate() + '일')
+                                    th #{data.PROJECT_NUM}
+                                    th #{data.PROJECT_NAME}
+                                    th #{(data.PROJECT_MONEY / data.PROJECT_DUEMONEY * 100).toFixed(2) + "%"}
+                                    th #{formedDate}
+                                    th #{data.PROJECT_MONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th #{data.PROJECT_DUEMONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    th
+                                        button.smallbtn(formmethod="GET", formaction="/project/revising", onclick='return checkModificationTable(#{data.PROJECT_NUM})') 수정
+                                    th
+                                        button.smallbtn(formmethod="POST", formaction="/project/manager/removal", onclick='return checkProjectDelete(#{data.PROJECT_NUM})') 삭제
+        
+        script.
+            function checkPaymentTable(projnum, prog) {
+                if (prog < 100.0) {
+                    alert('진행률이 100% 이상인 프로젝트만 모금 지급 가능합니다.');
+                    return false;
+                }
+                var projectnums = document.getElementsByClassName('projectnum');
+
+                for (var i = 0; i < projectnums.length; i++) {
+                    projectnums[i].value = projnum;
+                }
+                document.getElementById('progress').value = String(prog);
+                
+
+                return confirm('정말로 해당 프로젝트의 모금지급을 하시겠습니까?');
+            }
+
+            function checkModificationTable(projnum) {
+                var projectnums = document.getElementsByClassName('projectnum');
+
+                for (var i = 0; i < projectnums.length; i++) {
+                    projectnums[i].value = projnum;
+                }
+
+                return true;
+            }
+
+            function checkProjectDelete(projnum) {
+                var projectnums = document.getElementsByClassName('projectnum');
+
+                for (var i = 0; i < projectnums.length; i++) {
+                    projectnums[i].value = projnum;
+                }
+
+                return confirm('정말로 해당 프로젝트를 삭제하시겠습니까?');
+            }
